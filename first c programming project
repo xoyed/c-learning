@@ -1,0 +1,173 @@
+
+//student data management system or student portal
+#include <stdio.h>
+#include <string.h>
+
+struct Student
+{
+    int roll;
+    char name[50];
+    float cgpa;
+    char department[50];
+    int semester;
+    char phone[15];
+    char fatherName[50];
+    char motherName[50];
+    char district[50];
+};
+
+void displayStudent(struct Student s)
+{
+    printf("\n---📱 Student Details 📱---\n");
+    printf("Roll: %d\n", s.roll);
+    printf("Name: %s\n", s.name);
+    printf("CGPA: %.2f\n", s.cgpa);
+    printf("Department: %s\n", s.department);
+    printf("Semester: %d\n", s.semester);
+    printf("Phone: %s\n", s.phone);
+    printf("Father's Name: %s\n", s.fatherName);
+    printf("Mother's Name: %s\n", s.motherName);
+    printf("district: %s\n", s.district);
+}
+
+void saveToFile(struct Student students[], int n)
+{
+    FILE *fp = fopen("students.txt", "w");
+    if (fp == NULL)
+    {
+        printf("Failed to open file for writing.\n");
+        return;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        fprintf(fp, "%d|%s|%.2f|%s|%d|%s|%s|%s|%s\n",
+                students[i].roll, students[i].name, students[i].cgpa,
+                students[i].department, students[i].semester, students[i].phone,
+                students[i].fatherName, students[i].motherName, students[i].district);
+    }
+
+    fclose(fp);
+    printf("Student data saved to 'students.txt'.\n");
+}
+
+int main()
+{
+    struct Student students[] = {
+        {2478, "Ashraf", 3.67, "CSE", 2, "019023-69814", "Md Alhaj hossen", "Mst moriom", "sirajganj"},
+        {2494, "Rabia shekh", 3.80, "CSE", 2, "018XXXXXXXX", "Jamal Uddin", "Salma Khatun", "Kishoreganj"},
+        {2538, "Rafi khan", 3.83, "CSE", 2, "01950-238279", "Nazrul Islam", "Rokeya Begum", "Barisal"},
+        {2011, "Tarique rahaman", 3.50, "CSE", 2, "0190345678", "md adul aziz islam", "mst nilima begum", "sirajganj"},
+        {2332, "Sumaiya akter riya", 3.60, "CSE", 2, "01623434781", "munna khan", "mst mim ", "Dhaka"},
+        {2217, "obidul islam", 3.77, "CSE", 2, "01712345678", "shofiqul islam", "laboni akter", "noyakhali"},
+        {2412, "umma habiba", 3.89, "CSE", 2, "0182343567", "md abdul khalek", "mst lakhi", "satkhira"},
+        {2437, "tamim islam", 3.60, "CSE", 2, "0176898540", "Obaidul islam", "tina khan ", "khulna"},
+        {2503, "mohammad jubair", 3.90, "CSE", 2, "01576960429", "unknow", "unknown", "Barisal"},
+        {2562, "ruhul monowar", 4.00, "CSE", 2, "01904567890", "Abu Nahid", "Shamina Sultana", "nowga"},
+        {2501, "tirtha das", 4.00, "CSE", 2, "01789098761", "Unknown", "unknown", "noyakhali"},
+        {2518, "jabir", 4.78, "CSE", 2, "01909738739", "unknown", "unknown", "khulna"},
+        {2493, "fahim", 3.90, "CSE", 2, "0190907654", "unknown", "unknown", "Dhaka"},
+        {2565, "Aarav", 3.75, "CSE", 2, "01710000001", "Rahim Uddin", "Fatema Begum", "Dhaka"},
+        {2566, "Sadia", 3.60, "CSE", 2, "01710000002", "Karim Ahmed", "Rokeya Sultana", "Chittagong"},
+        {2567, "Tanvir", 3.85, "CSE", 2, "01710000003", "Habib Ullah", "Nargis Akter", "Khulna"},
+        {2568, "Nusrat", 3.90, "CSE", 2, "01710000004", "Shahidul Islam", "Shamima Nasrin", "Rajshahi"},
+        {2569, "Imran", 3.70, "CSE", 2, "01710000005", "Jamal Hossain", "Salma Khatun", "Sylhet"},
+        {2570, "Mitu", 3.65, "CSE", 2, "01710000006", "Nazrul Islam", "Razia Sultana", "Barisal"},
+        {2539, "nazmul", 3.70, "CSE", 2, "01710000007", "Abdul Kader", "Hasina Begum", "Rangpur"},
+        {2572, "Tania", 3.55, "CSE", 2, "01710000008", "Mizanur Rahman", "Shirin Akter", "Mymensingh"},
+        {2573, "Shuvo", 3.95, "CSE", 2, "01710000009", "Anwar Hossain", "Nazma Begum", "Comilla"},
+        {2574, "Priya", 3.60, "CSE", 2, "01710000010", "Faruk Ahmed", "Laila Khatun", "Jessore"},
+        {2575, "Hasan", 3.70, "CSE", 2, "01710000011", "Sultan Mahmud", "Rumana Akter", "Bogra"},
+        {2576, "Maya", 3.85, "CSE", 2, "01710000012", "Kamal Uddin", "Shahana Begum", "Narayanganj"},
+        {2577, "Arif", 3.90, "CSE", 2, "01710000013", "Shafiqul Islam", "Parveen Sultana", "Tangail"},
+        {2578, "Lima", 3.65, "CSE", 2, "01710000014", "Rafiqul Islam", "Nasima Akter", "Noakhali"},
+        {2488, "Nayeem", 4.00, "CSE", 2, "01710000015", "Abdul Mannan", "Shamima Akter", "Pabna"},
+        {2580, "Rima", 3.80, "CSE", 2, "01710000016", "Shah Alam", "Farida Yasmin", "Kushtia"},
+        {2581, "Sabbir", 3.60, "CSE", 2, "01710000017", "Harunur Rashid", "Mahmuda Khatun", "Feni"},
+        {2582, "Anika", 3.85, "CSE", 2, "01710000018", "Abdul Aziz", "Rokeya Begum", "Satkhira"},
+        {2583, "Jahid", 3.90, "CSE", 2, "01710000019", "Mostafa Kamal", "Shahnaz Parveen", "Dinajpur"},
+        {2584, "Mousumi", 3.70, "CSE", 2, "01710000020", "Abul Kalam", "Naznin Akter", "Bhola"},
+        {2585, "Fahim", 3.65, "CSE", 2, "01710000021", "Nurul Islam", "Rina Akter", "Lalmonirhat"},
+        {2586, "Nadia", 3.80, "CSE", 2, "01710000022", "Abdur Rahman", "Salma Akter", "Sherpur"},
+        {2587, "Rashed", 3.55, "CSE", 2, "01710000023", "Shamsul Haque", "Shabnam Akter", "Meherpur"},
+        {2588, "Sumaiya", 3.95, "CSE", 2, "01710000024", "Abdul Halim", "Sultana Begum", "Chandpur"},
+        {2589, "Tanvir", 3.60, "CSE", 2, "01710000025", "Abdul Karim", "Fatema Khatun", "Habiganj"},
+        {2590, "Jannat", 3.70, "CSE", 2, "01710000026", "Shahidul Alam", "Rokeya Sultana", "Gaibandha"},
+        {2591, "Omar", 3.85, "CSE", 2, "01710000027", "Abdul Matin", "Shamima Nasrin", "Pirojpur"},
+        {2592, "Farzana", 3.90, "CSE", 2, "01710000028", "Abdul Hye", "Nazma Akter", "Netrokona"},
+        {2593, "Raihan", 3.75, "CSE", 2, "01710000029", "Shafiqul Islam", "Parveen Akter", "Jamalpur"},
+        {2594, "Mim", 3.65, "CSE", 2, "01710000030", "Abdul Gafur", "Shirin Akter", "Barguna"},
+
+    };
+    int n = sizeof(students) / sizeof(students[0]);
+
+    int choice;
+    do
+    {
+        printf("\nChoose an option:\n");
+        printf("1. Search by Roll\n");
+        printf("2. Search by Name\n");
+        printf("3. Save to File\n");
+        printf("4. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        if (choice == 1)
+        {
+            int rollInput;
+            printf("Enter Roll Number: ");
+            scanf("%d", &rollInput);
+
+            int found = 0;
+            for (int i = 0; i < n; i++)
+            {
+                if (students[i].roll == rollInput)
+                {
+                    displayStudent(students[i]);
+                    found = 1;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                printf("Student not found.\n");
+            }
+        }
+        else if (choice == 2)
+        {
+            char nameInput[50];
+            printf("Enter Name: ");
+            scanf(" %[^\n]", nameInput);
+
+            int found = 0;
+            for (int i = 0; i < n; i++)
+            {
+                if (strcasecmp(students[i].name, nameInput) == 0)
+                {
+                    displayStudent(students[i]);
+                    found = 1;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                printf("Student not found.\n");
+            }
+        }
+        else if (choice == 3)
+        {
+            saveToFile(students, n);
+        }
+        else if (choice == 4)
+        {
+            printf("Exiting program. Goodbye!\n");
+        }
+        else
+        {
+            printf("Invalid choice. Please try again.\n");
+        }
+
+    } while (choice != 4);
+
+    return 0;
+}
